@@ -1,4 +1,63 @@
-Hello::Application.routes.draw do
+EasyW::Application.routes.draw do
+  resources :permission_resources
+
+
+  
+  resources :menus
+
+
+  resources :notify_schedulers
+  root :to=>"home#index"
+  resources :users
+
+  resources :recipients
+
+  resources :notify_observer_properties
+
+  resources :notify_observers
+
+  resources :events
+  resources :notify_events
+
+  resources :notify_templates
+
+  resources :roles
+
+  
+  
+  resources :resources
+  resources :resource_types
+  resources :resource_values
+  resources :fields
+  resources :field_types
+  match "/update_fields" => "ResourceTypes#update_fields"
+  match "/update_resources" => "Resources#update_resources"
+  
+  match "/update_permroles_fields" => "PermissionRoles#update_permroles_fields"
+
+  match "/get_field_types" => "FieldTypes#get_all_types"
+  match "/get_recipients" => "Users#get_recipients"
+  match "/get_notify_observer_properties" => "NotifyObserverProperties#get_notify_observer_properties"
+  match "/get_notify_template_mappings" => "NotifyObserverProperties#get_notify_template_mappings"
+  
+  get "signed_out" => "authentication#signed_out"
+  get "forgot_password" => "authentication#forgot_password"
+  get "password_sent" => "authentication#password_sent"
+  
+
+  get "sign_in" => "authentication#sign_in"
+  post "sign_in" => "authentication#login"
+
+  get "account_settings" => "authentication#account_settings"
+  put "account_settings" => "authentication#set_account_info"
+
+  get "forgot_password" => "authentication#forgot_password"
+  put "forgot_password" => "authentication#send_password_reset_instructions"
+
+  get "password_reset" => "authentication#password_reset"
+  put "password_reset" => "authentication#new_password"
+
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +107,7 @@ Hello::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  #  root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
